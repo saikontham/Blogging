@@ -2,6 +2,7 @@ package org.blog.blogging.globalhandler;
 
 import org.blog.blogging.exceptions.CustomerNotFoundException;
 import org.blog.blogging.exceptions.EmailAlreadyExistsException;
+import org.blog.blogging.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -39,6 +40,20 @@ public class GlobalExceptionHandler {
                         .ErrorDescription(BusinessErrorCodes.CUSTOMER_NOT_FOUND.getDescription())
                         .ErrorCode(BusinessErrorCodes.CUSTOMER_NOT_FOUND.getCode())
                         .error(customerNotFoundException.getMessage())
+                        .build()
+                );
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseBody
+    public ResponseEntity<ExceptionResponse> handleCustomerNotFoundException(ResourceNotFoundException resourceNotFoundException)
+    {
+        return  ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ExceptionResponse.builder()
+                        .ErrorDescription(BusinessErrorCodes.RESOURCE_NOT_FOUND.getDescription())
+                        .ErrorCode(BusinessErrorCodes.RESOURCE_NOT_FOUND.getCode())
+                        .error(resourceNotFoundException.getMessage())
                         .build()
                 );
     }
