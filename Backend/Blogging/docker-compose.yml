@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  postgres:
+    container_name: postgres_blog_container
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: blog_db
+    ports:
+      - "5432:5432"
