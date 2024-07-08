@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.blog.blogging.payloads.ApiResponse;
 import org.blog.blogging.payloads.CustomerDTO;
 import org.blog.blogging.services.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

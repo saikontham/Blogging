@@ -15,6 +15,7 @@ public enum BusinessErrorCodes {
     ACCOUNT_DISABLED(303, FORBIDDEN, "User account is disabled"),
     BAD_CREDENTIALS(304, FORBIDDEN, "Login and / or Password is incorrect"),
     CUSTOMER_NOT_FOUND(305, BAD_REQUEST, "Customer not found"),
+    RESOURCE_NOT_FOUND(305, BAD_REQUEST, "Resource not found"),
 
     EMAIL_EXISTS(305,BAD_REQUEST,"Email Already Exists")
     ;
