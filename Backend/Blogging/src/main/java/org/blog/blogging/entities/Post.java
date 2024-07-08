@@ -2,8 +2,11 @@ package org.blog.blogging.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.blog.blogging.payloads.CommentDTO;
+import org.hibernate.annotations.Comments;
 
 import java.util.Date;
+import java.util.Set;
 
 
 @Entity
@@ -35,5 +38,8 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "categoryId", nullable = false)
     private Category category;
+
+    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
+    private Set<Comment> comments;
 
 }

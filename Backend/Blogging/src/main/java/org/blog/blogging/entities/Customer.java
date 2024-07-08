@@ -28,4 +28,6 @@ public class Customer {
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Post> posts;
 
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Comment> comments;
 }
