@@ -1,15 +1,22 @@
 package org.blog.blogging.services;
 
 import lombok.RequiredArgsConstructor;
+import org.blog.blogging.config.AppConstants;
 import org.blog.blogging.entities.Customer;
+import org.blog.blogging.entities.Role;
 import org.blog.blogging.exceptions.EmailAlreadyExistsException;
 import org.blog.blogging.exceptions.CustomerNotFoundException;
 import org.blog.blogging.payloads.CustomerDTO;
+import org.blog.blogging.payloads.RoleDTO;
 import org.blog.blogging.repositories.CustomerRepository;
+import org.blog.blogging.repositories.RoleRepository;
 import org.blog.blogging.utils.CustomerMapper;
+import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.lang.String.*;
@@ -21,14 +28,20 @@ public class CustomerServiceImpl implements CustomerService{
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
+    private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
+    private final ModelMapper modelMapper;
     @Override
     public CustomerDTO createCustomer(CustomerDTO customerDTO) {
         if (customerRepository.existsByEmail(customerDTO.getEmail())) {
             throw new EmailAlreadyExistsException("Customer with email already exists");
         }
         Customer customer=customerMapper.CustomerDTOtoCustomer(customerDTO);
-        customerRepository.save(customer);
-        return customerMapper.CustomertoCustomerDTO(customer);
+        customer.setPassword(passwordEncoder.encode(customerDTO.getPassword()));
+        Role role = roleRepository.findById(AppConstants.NORMAL_USER).get();
+        customer.getRoles().add(role);
+        Customer saved = customerRepository.save(customer);
+        return modelMapper.map(saved,CustomerDTO.class);
     }
 
     @Override
