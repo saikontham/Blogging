@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
 
 
 @AllArgsConstructor
@@ -33,4 +35,5 @@ public class CustomerDTO {
     @NotEmpty(message = "About cannot be empty")
     private String about;
 
+    private Set<RoleDTO> roles=new HashSet<>();
 }
