@@ -13,6 +13,7 @@ import org.blog.blogging.entities.Category;
 import org.blog.blogging.entities.Customer;
 
 import java.util.Date;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -33,4 +34,5 @@ public class PostDTO {
     private CustomerDTO customer;
 
     private CategoryDTO category;
+    private Set<CommentDTO> comments;
 }

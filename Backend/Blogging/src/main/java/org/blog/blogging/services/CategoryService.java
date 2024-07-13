@@ -12,5 +12,6 @@ public interface CategoryService {
      void deleteCategory(Integer categoryId );
      CategoryDTO getCategory(Integer categoryId);
      List<CategoryDTO> getListOfCategory();
+     List<CategoryDTO> searchPost(String search);
 
 }

@@ -57,4 +57,11 @@ public class CategoryServiceImpl implements CategoryService{
                 .collect(Collectors.toList());
         return categoryDTOList;
     }
+    @Override
+    public List<CategoryDTO> searchPost(String search) {
+
+        List<Category> titleContaining = categoryRepository.searchByCategoryTitle(search);
+        List<CategoryDTO> categoryDTOList = titleContaining.stream().map(category -> modelMapper.map(category, CategoryDTO.class)).collect(Collectors.toList());
+        return categoryDTOList;
+    }
 }
