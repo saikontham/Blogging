@@ -47,4 +47,9 @@ public class CategoryController {
         List<CategoryDTO> categoryDTOList = categoryService.getListOfCategory();
         return ResponseEntity.ok(categoryDTOList);
     }
+    @GetMapping("/search/{search}")
+    public ResponseEntity<List<CategoryDTO>> searchPost(@PathVariable String search) {
+        List<CategoryDTO> categoryDTOS = categoryService.searchPost("%"+search+"%");
+        return new ResponseEntity<>(categoryDTOS, HttpStatus.OK);
+    }
 }
